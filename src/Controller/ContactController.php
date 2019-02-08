@@ -123,7 +123,7 @@ class ContactController extends AbstractController
             $entityManager->flush();
 
 
-            $message = (new \Swift_Message('Hello Email'))
+            $message = (new \Swift_Message('new'))
                 ->setFrom('testagence6@gmail.com')
                 ->setTo('malek.laatiri73@gmail.com')
                 ->setBody(

@@ -32,7 +32,6 @@ class DeleteController extends AbstractController
     {
         //$user = $this->container->get('security.context')->getToken()->getUser();
         $connecteduser = $this->getUser()->getId();
-        dump($connecteduser);
         $entityManager = $this->getDoctrine()->getManager();
 
 
@@ -46,7 +45,7 @@ class DeleteController extends AbstractController
         $entityManager->persist($property);
         $entityManager->flush();
 
-        $message = (new \Swift_Message('Hello Email'))
+        $message = (new \Swift_Message('deleted'))
             ->setFrom('testagence6@gmail.com')
             ->setTo('malek.laatiri73@gmail.com')
             ->setBody(
