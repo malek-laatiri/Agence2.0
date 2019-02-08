@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {{ form_start(formupdate) }}
+
+    <div class="container">
+    <h1>update</h1>
+    <label for="">titre</label>
+    <div class="form-group">
+        {{ form_widget(formupdate.title) }}
+    </div>
+    <label>type</label>
+    <div class="list-group">
+        {{ form_widget(formupdate.token) }}
+    </div>
+    <label>Description</label>
+    <div class="form-group">
+        {{ form_widget(formupdate.Description) }}
+    </div>
+    <label>categorie</label>
+    <div class="form-group">
+        {{ form_widget(formupdate.categ) }}
+    </div>
+    <label>surface</label>
+    <div class="form-group">
+        {{ form_widget(formupdate.surface) }}
+    </div>
+    <label>rooms</label>
+    <div class="form-group">
+        {{ form_widget(formupdate.rooms) }}
+    </div>
+    <label>bedroom</label>
+    <div class="form-group">
+        {{ form_widget(formupdate.bedroom) }}
+    </div>
+    <label>floor</label>
+    <div class="form-group">
+        {{ form_widget(formupdate.floor) }}
+    </div>
+    <label>price</label>
+    <div class="form-group">
+        {{ form_widget(formupdate.price) }}
+    </div>
+    <label>heat</label>
+    <div class="form-group">
+        {{ form_widget(formupdate.headt) }}
+    </div>
+    <label>city</label>
+    <div class="form-group">
+        {{ form_widget(formupdate.city) }}
+    </div>
+    <label>addrress</label>
+    <div class="form-group">
+        {{ form_widget(formupdate.address) }}
+    </div>
+    <label>postal code</label>
+    <div class="form-group">
+        {{ form_widget(formupdate.postal_code) }}
+    </div>
+    <label>image </label>
+    <div class="form-group">
+        {{ form_widget(formupdate.imageFile) }}
+    </div>
+    <label>equipements</label>
+    <div class="list-group">
+        {{ form_widget(formupdate.equipement) }}
+    </div>
+    <div class="btn btn-primary">
+        {{ form_widget(formupdate.save) }}
+    </div>
+
+    {{ form_end(formupdate  ) }}
+{% endblock %}

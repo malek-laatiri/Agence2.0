@@ -1,0 +1,112 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {% if property.createdby is same as ( 'xxx_'~ property.id ~'_deleted') %} {#au moment du suppression de l'annonce meme s'il essai de ecrire meme URL
+                                                                               il ne peut y acceder#}
+        <div class="d-flex justify-content-center">
+            <div class="d-flex justify-content-center">
+
+                <h1 style="
+    margin-top: 27px;
+    margin-left: 10px;
+">cette annonce est supprimée </h1>
+            </div>
+            <div class="d-flex justify-content-start">
+                <img  style="
+
+  display: block;
+  width: 100px;
+  height: 100px;
+  margin-left: 20px;
+  margin-top: 15px;
+
+  " src="/images/sorry.png">
+            </div>
+        </div>
+    {% else%}
+        <div class="jumbotron">
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-7">
+                        <img class="img-thumbnail" src="/images/products/{{ property.image }}">
+
+                    </div>
+                    <div class="col-md-5">
+                        <h3><ins>{{ property.token }}</ins></h3>
+                        <h1>{{ property.title }} - {{ property.categ }}</h1>
+                        <h2>{{ property.rooms }} piéces - {{ property.surface }} m²</h2>
+                        <div class="text-primary" style="font-size: 2em"><b>{{ property.FormattedPrice }} €</b></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <p>{{ property.description |nl2br}}</p>
+            <div class="row">
+                <div class="col-md-5">
+                    <h2>Caracteristiques</h2>
+                    <table class="table table-stripped">
+                        <tr>
+                            <td>surface habitable</td>
+                            <td class="badge badge-primary badge-pill">{{ property.surface }}</td>
+                        </tr>
+
+                        <tr>
+                            <td>pieces</td>
+                            <td class="badge badge-primary badge-pill">{{ property.rooms }}</td>
+                        </tr>
+                        <tr>
+                            <td>chambres</td>
+                            <td class="badge badge-primary badge-pill">{{ property.bedroom }}</td>
+                        </tr>
+                        <tr>
+                            <td>etage</td>
+                            <td class="badge badge-primary badge-pill">{{ property.floor }}</td>
+                        </tr>
+                        <tr>
+                            <td>chauffage</td>
+                            <td class="badge badge-primary badge-pill">{{ property.headt }}</td>
+                        </tr>
+                        <tr>
+                            <td>equipement</td>
+                            <td class="badge badge-primary badge-pill">{{ property.equipement|join(' | ') }}</td>
+                        </tr>
+                        {#<tr>
+                             <td>equipement</td>
+                             {% for user in 0..property.equipement|length-1 %}
+                             <td class="badge badge-primary badge-pill">{{ property.equipement|length }}</td>
+                             {% endfor %}
+                         </tr>#}
+
+
+                    </table>
+                </div>
+                {% if app.user.id is not defined  %}
+                    <div></div>
+                {% elseif  app.user.id == property.createdby %}
+
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-danger"><a href="{{ path('update.create',{id: property.id, slug: property.slug})}}">Update</a></button>
+
+                    </div>
+
+                    <div class="col-md-2">
+                        <button type="button" onclick="BeCautious()" class="btn btn-danger"><a href="{{ path('delete.delete',{id: property.id, slug: property.slug})}}">Delete</a></button>
+
+                    </div>
+                {% endif %}
+
+            </div>
+        </div>
+
+    {% endif %}
+
+{% endblock %}
+{% block javascripts %}
+    <script>
+        function BeCautious() {
+            alert("voulez vous vraiment supprimer votre annonce? ");
+        }
+    </script>
+
+{% endblock %}

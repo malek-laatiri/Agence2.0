@@ -1,0 +1,138 @@
+{% extends 'base.html.twig' %}
+{% block title 'Agence Malek' %}
+{% block body %}
+        <div class="container" style="
+    margin-top: 50px;
+">
+
+
+            {{ form_start(form) }}
+            <div class="container">
+
+                <div class="row">
+
+
+                    <label>type</label>
+                <div class="col" >
+                    {{ form_widget(form.token) }}
+                </div>
+
+                <label>categorie</label>
+                <div class="col">
+                    {{ form_widget(form.categ) }}
+                </div>
+                <label>surface</label>
+                <div class="col" >
+                    {{ form_widget(form.surface) }}
+                </div>
+                </div>
+                <div class="row">
+                    <label>rooms</label>
+                <div class="col">
+                    {{ form_widget(form.rooms) }}
+                </div>
+                 </div>
+
+                <div class="row">
+                <label>price</label>
+                <div class="col">
+                    {{ form_widget(form.price) }}
+
+                </div>
+                    <output  id="price"></output>
+
+
+                    <label>city</label>
+                <div class="col">
+                    {{ form_widget(form.city) }}
+                </div>
+
+
+                <label>equipements</label>
+                <div class="col">
+                    {{ form_widget(form.equipement) }}
+                </div>
+                <div class="btn btn-primary">
+                    {{ form_widget(form.save,{ 'label': 'Chercher' }) }}
+
+                </div>
+                </div>
+            </div>
+                {{ form_end(form) }}
+
+
+
+
+    <div class="container">
+    {% if form.vars.submitted  %}
+
+        {# total items count #}
+        <div class="count">
+           <h3> {{ Property.getTotalItemCount }} Annonces trouvés a {{ recherche.token }} de {{ recherche.categ }} à {{ recherche.city }}
+           </h3></div>
+    {% endif %}
+
+    {# table body #}
+    <div class="row">
+        {% for property in Property %}
+            <div {% if loop.index is odd %}class="color"{% endif %}>
+                <div class="card " style="width: 250px;">
+                    <img class="card-img-top" src="/images/products/{{ property.image }}">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a href="{{ path('property.show',{id: property.id, slug: property.slug})}}" class="blockquote text-center">{{property.title}}</a>
+                        </h5>
+                        <div class="text-primary" style="font-size: 20px"><b>{{ property.FormattedPrice }} €</b></div>
+                    </div>
+
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+
+
+    <div class="container">
+        <div class="display-4">Tous nos produits
+        </div>
+        <br>
+    </div>
+    <div class="container">
+    <div class=" row">
+        {%  for property in x %}
+            <div class="mx-auto animated fadeInDown">
+
+                <div class="card " style="width: 250px;">
+                    <img class="card-img-top " src="/images/products/{{ property.image }}">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a href="{{ path('property.show',{id: property.id, slug: property.slug})}}" class="blockquote text-center">{{property.title}}</a>
+                        </h5>
+                        <div class="text-primary" style="font-size: 20px"><b>{{ property.FormattedPrice }} €</b></div>
+                    </div>
+
+                </div>
+            </div>
+        {% endfor %}
+
+
+
+
+
+
+    </div>
+    </div>
+
+
+        {# display navigation #}
+        <div class="navigation">
+            {{ knp_pagination_render(Property) }}
+        </div>
+
+
+    <div class="pagerfanta d-flex justify-content-center">
+        {{ pagerfanta(my_pager, 'twitter_bootstrap4') }}
+    </div>
+
+
+{% endblock %}

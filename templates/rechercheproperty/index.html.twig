@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello RecherchepropertyController!{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="display-4">Tous nos produits
+        </div>
+        <br>
+    </div>
+    <div class="container">
+        <div class=" row">
+                <div class="mx-auto">
+
+                    <div class="card" style="width: 250px;">
+                        <img class="card-img-top" src="/images/products/{{ property.image }}">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a href="{{ path('property.show',{id: property.id, slug: property.slug})}}" class="blockquote text-center">{{property.title}}</a>
+                            </h5>
+                            <div class="text-primary" style="font-size: 20px"><b>{{ property.FormattedPrice }} €</b></div>
+                        </div>
+
+                    </div>
+                </div>
+        </div>
+    </div>
+    <div class="pagerfanta d-flex justify-content-center">
+        {{ pagerfanta(my_pager, 'twitter_bootstrap4') }}
+    </div>
+{% endblock %}

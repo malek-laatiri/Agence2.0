@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+{% block title 'Tous nous bien' %}
+{% block body %}
+
+
+    <div class="jumbotron txt-center" id="carouselExampleSlidesOnly"  data-ride="carousel">
+        <img width="800" height="250" class="animated infinite slow fadeIn" style="margin-left: 280px;" id="imageslider" />
+
+    </div>
+    <div class="container">
+        <h2>les derniers</h2>
+        <div class="row">
+        {%  for property in properties %}
+            <div class="col-3">
+                <div class="card animated fadeInDown">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a href="{{ path('property.show',{id: property.id, slug: property.slug})}}">{{property.title}}</a>
+                        </h5>
+                        <p class="card-text">  <img class="card-img-top " src="/images/products/{{ property.image}}" {{ property.city }} ({{ property.postalCode }})></p>
+                    <div class="text-primary" style="font-size:2rem">{{ property.FormattedPrice }} €</div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        var array = [
+                '/images/maison/hd1.jpg',
+                '/images/maison/hd2.jpg',
+                '/images/maison/hd3.jpg'],
+            curIndex = 0;
+        imgDuration = 2100;
+
+        function slideShow() {
+            document.getElementById('imageslider').src = array[curIndex];
+            curIndex++;
+            if (curIndex == array.length) { curIndex = 0; }
+            setTimeout("slideShow()", imgDuration);
+        }
+        slideShow();
+    </script>
+{% endblock %}

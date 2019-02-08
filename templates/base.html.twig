@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}
+        </title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <img style="
+    width: 20px;
+" class="animated  bounce delay-1s" src="\images\house.png">
+        <a class="navbar-brand" href="{{path('home') }}"> Agence</a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item ">
+                    <a class="navbar-brand" {% if current_menu is defined and current_menu=='properities' %}active {% endif %} href="{{ path('property') }}">Acheter</a>
+                    {% if app.user.username is  defined %}
+
+                <li class="nav-item ">
+                    <a class="navbar-brand" {% if current_menu is defined and current_menu=='properities' %}active {% endif %} href="{{ path('contact') }}">Déposer une annonce </a>
+                </li>
+                {% else %}
+                <li class="nav-item ">
+                    <a class="navbar-brand" {% if current_menu is defined and current_menu=='properities' %}active {% endif %} href="{{ path('login') }}">Déposer une annonce </a>
+                </li>
+                {% endif %}
+            </ul>
+
+              {% if app.user.username is not defined %}
+            <div class="col-lg-offset-5"></div>
+            <div class="nav-item ">
+                <a class="navbar-brand "  href="{{ path('login') }}">login</a>
+            </div>
+            {% else %}
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Hi {{ app.user.username }}
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="{{ path('information') }}"> Profile</a>
+                        {% if app.user.username == "adminuser" %}
+                            <a class="dropdown-item" href="{{ path('login') }}">admin</a>
+                        {% endif %}
+                        <a class="dropdown-item" href="{{ path('logout') }}">Logout</a>
+                    </div>
+                </div>
+            {% endif %}
+
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </nav>
+        {% block body %}{% endblock %}
+        {% block javascripts %} {% endblock %}
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    </body>
+</html>

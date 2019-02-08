@@ -1,0 +1,9 @@
+fos_user:
+    db_driver: orm # other valid values are 'mongodb' and 'couchdb'
+    firewall_name: main
+    user_class: App\Entity\User
+    from_email:
+        address: "malek.laatiri73@gmail.com"
+        sender_name: "root"
+    group:
+          group_class: App\Entity\User

@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello InformationController!{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3">
+        <h1>Username</h1>
+    <h4 class=" badge-primary badge-pill  ">{{ app.user.username }}</h4>
+        </div>
+        <div class="col-lg-3">
+
+        <h1>Email</h1>
+
+        <h4 class="badge-primary badge-pill">{{ app.user.email }}</h4>
+        </div>
+        <div class="col-lg-3">
+        <h1>Last Login</h1>
+
+        <h4 class="badge-primary badge-pill"> {{ app.user.lastLogin|date('Y-m-d')}}</h4>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+        <div class="container">
+            <h2>Vos annonce</h2>
+            <div class="row">
+                {%  for y in property %}
+                    <div class="col-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <a href="{{ path('property.show',{id: y.id, slug: y.slug})}}">{{y.title}}</a>
+                                </h5>
+                                <p class="card-text">  <img class="card-img-top " src="/images/products/{{ y.image}}" {{ y.city }} ({{ y.postalCode }})></p>
+                                <div class="text-primary" style="font-size:2rem">{{ y.FormattedPrice }} $</div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+
+{% endblock %}

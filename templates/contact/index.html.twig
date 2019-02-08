@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    {{ form_start(formmaison) }}
+    <div class="container">
+    <label for="">titre</label>
+    <div class="form-group">
+        {{ form_widget(formmaison.title) }}
+    </div>
+    <label>type</label>
+    <div class="list-group">
+        {{ form_widget(formmaison.token) }}
+    </div>
+    <label>Description</label>
+    <div class="form-group">
+        {{ form_widget(formmaison.Description) }}
+    </div>
+    <label>categorie</label>
+    <div class="form-group">
+        {{ form_widget(formmaison.categ) }}
+    </div>
+    <label>surface</label>
+    <div class="form-group">
+        {{ form_widget(formmaison.surface) }}
+    </div>
+    <label>rooms</label>
+    <div class="form-group">
+        {{ form_widget(formmaison.rooms) }}
+    </div>
+    <label>bedroom</label>
+    <div class="form-group">
+        {{ form_widget(formmaison.bedroom) }}
+    </div>
+    <label>floor</label>
+    <div class="form-group">
+        {{ form_widget(formmaison.floor) }}
+    </div>
+    <label>price</label>
+    <div class="form-group">
+        {{ form_widget(formmaison.price) }}
+    </div>
+    <label>heat</label>
+    <div class="form-group">
+        {{ form_widget(formmaison.headt) }}
+    </div>
+    <label>city</label>
+    <div class="form-group">
+        {{ form_widget(formmaison.city) }}
+    </div>
+    <label>addrress</label>
+    <div class="form-group">
+        {{ form_widget(formmaison.address) }}
+    </div>
+    <label>postal code</label>
+    <div class="form-group">
+        {{ form_widget(formmaison.postal_code) }}
+    </div>
+    <label>image </label>
+    <div class="form-group">
+        {{ form_widget(formmaison.imageFile) }}
+    </div>
+    <label>equipements</label>
+    <div class="list-group">
+        {{ form_widget(formmaison.equipement) }}
+    </div>
+    <div class="btn btn-primary">
+        {{ form_widget(formmaison.save) }}
+    </div>
+
+    {{ form_end(formmaison) }}
+{% endblock %}

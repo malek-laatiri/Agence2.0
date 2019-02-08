@@ -1,0 +1,45 @@
+home:
+ path: /
+ controller: App\Controller\HomeController::index
+
+property:
+ path: /biens
+ controller: App\Controller\PropertyController::index
+
+fos_user:
+ resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+contact:
+    path: /contact
+    controller: App\Controller\ContactController::create
+login:
+    path: /admin
+task_success:
+ path: /return
+ controller: App\Controller\ContactController::index
+
+information:
+ path: /information
+ controller: App\Controller\InformationController::index
+register:
+ path: /register
+logout:
+ path: /logout
+
+
+
+task_update:
+ path: /done_update
+ controller: App\Controller\UpdateController::did
+
+
+sonata_user_admin_security:
+    resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
+    prefix: /admin
+
+sonata_user_admin_resetting:
+    resource: '@SonataUserBundle/Resources/config/routing/admin_resetting.xml'
+    prefix: /admin/resetting
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
