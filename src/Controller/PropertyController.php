@@ -77,12 +77,27 @@ class PropertyController extends AbstractController
     public function show($slug, $id): Response
     {
         $property = $this->repository->find($id);
+        $address = $property->getAddress(); // Address
+
+        // Get JSON results from this request
+        $geo = file_get_contents('https://api.mapbox.com/geocoding/v5/mapbox.places/'.urlencode($address).'.json?access_token=pk.eyJ1IjoibWFsZWs5OCIsImEiOiJjanNnbnhubjMwMXE5NDNuem9sbjJ1NG9xIn0.S9QvJekjC8Hyn_AtUyw2uw');
+        $geo = json_decode($geo, true); // Convert the JSON to an array
+
+        $latitude = $geo['features'][0]['geometry']['coordinates']['0']; // Latitude
+        $longitude = $geo['features'][0]['geometry']['coordinates']['1']; // Longitude
+        $add = $geo['features'][0]['place_name'];
+        dump($longitude);
+        dump($latitude);
+        dump($add);
         return $this->render('show.html.twig', [
-            'property' => $property,
-            'current_menu' => 'preperties'
+               'property' => $property,
+                        'current_menu' => 'preperties',
+            'latitude'=>$latitude,
+            'longitude'=>$longitude,
+            'adds'=>$add
+
         ]);
     }
-
 
 
 

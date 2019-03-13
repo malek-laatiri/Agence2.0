@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
+
 {% block body %}
+
     {% if property.createdby is same as ( 'xxx_'~ property.id ~'_deleted') %} {#au moment du suppression de l'annonce meme s'il essai de ecrire meme URL
                                                                                il ne peut y acceder#}
         <div class="d-flex justify-content-center">
@@ -23,82 +25,183 @@
             </div>
         </div>
     {% else%}
-        <div class="jumbotron">
+        {% if property.allowed == false %}
 
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-7">
-                        <img class="img-thumbnail" src="/images/products/{{ property.image }}">
+            <div class="d-flex justify-content-center">
+                <div class="d-flex justify-content-center">
 
-                    </div>
-                    <div class="col-md-5">
-                        <h3><ins>{{ property.token }}</ins></h3>
-                        <h1>{{ property.title }} - {{ property.categ }}</h1>
-                        <h2>{{ property.rooms }} piéces - {{ property.surface }} m²</h2>
-                        <div class="text-primary" style="font-size: 2em"><b>{{ property.FormattedPrice }} €</b></div>
-                    </div>
+                    <h3 class="sl-sp-title" style="
+    margin-top: 20px;">Administrateur en train d'examiner votre annonce  </h3>
+                </div>
+                <div class="d-flex justify-content-start" >
+                    <img  style="display: block;width: 50px;height: 50px;margin-left: 20px;margin-top: 15px;" id="loading" src="/images/load.png">
                 </div>
             </div>
-        </div>
-        <div class="container">
-            <p>{{ property.description |nl2br}}</p>
-            <div class="row">
-                <div class="col-md-5">
-                    <h2>Caracteristiques</h2>
-                    <table class="table table-stripped">
-                        <tr>
-                            <td>surface habitable</td>
-                            <td class="badge badge-primary badge-pill">{{ property.surface }}</td>
-                        </tr>
-
-                        <tr>
-                            <td>pieces</td>
-                            <td class="badge badge-primary badge-pill">{{ property.rooms }}</td>
-                        </tr>
-                        <tr>
-                            <td>chambres</td>
-                            <td class="badge badge-primary badge-pill">{{ property.bedroom }}</td>
-                        </tr>
-                        <tr>
-                            <td>etage</td>
-                            <td class="badge badge-primary badge-pill">{{ property.floor }}</td>
-                        </tr>
-                        <tr>
-                            <td>chauffage</td>
-                            <td class="badge badge-primary badge-pill">{{ property.headt }}</td>
-                        </tr>
-                        <tr>
-                            <td>equipement</td>
-                            <td class="badge badge-primary badge-pill">{{ property.equipement|join(' | ') }}</td>
-                        </tr>
-                        {#<tr>
-                             <td>equipement</td>
-                             {% for user in 0..property.equipement|length-1 %}
-                             <td class="badge badge-primary badge-pill">{{ property.equipement|length }}</td>
-                             {% endfor %}
-                         </tr>#}
 
 
-                    </table>
-                </div>
+
+        {% endif %}
+
+      <section class="page-section">
+
+
+
+		  <div class="site-breadcrumb">
+			  <div class="container">
+				  <a href="{{ path('property') }}"><i class="fa fa-home"></i>acheter</a>
+
+				  <span><i class="fa fa-angle-right"></i>{{ property.title }}</span>
+			  </div>
+		  </div>
+		<div class="container">
+			<div class="row">
+									<div class="panel-body sl-item set-bg">
+																<div class="sale-notic">{{ property.token }}</div>
+										<img class="sl-item set-bg" style="width: 690px;height: 400px;margin-left: 100px;" src="/images/products/{{ property.image }}" alt="">
+									</div>
                 {% if app.user.id is not defined  %}
-                    <div></div>
+					<div></div>
                 {% elseif  app.user.id == property.createdby %}
 
-                    <div class="col-md-2">
-                        <button type="button" class="btn btn-danger"><a href="{{ path('update.create',{id: property.id, slug: property.slug})}}">Update</a></button>
+					<div class="button_cont" align="center"><a class="example_c" href="{{ path('update.create',{id: property.id, slug: property.slug})}}" >
+							<i class="fa fa-pencil fa-lg"></i>mise a jour
+						</a></div>
 
-                    </div>
 
-                    <div class="col-md-2">
-                        <button type="button" onclick="BeCautious()" class="btn btn-danger"><a href="{{ path('delete.delete',{id: property.id, slug: property.slug})}}">Delete</a></button>
 
-                    </div>
+
+					<div class="button_cont" align="center"><a class="example_c"  onclick="BeCautious()" href="{{ path('delete.delete',{id: property.id, slug: property.slug})}}" >
+							<i class="fa fa-trash-o fa-lg"></i>supprimer
+						</a></div>
+
+
                 {% endif %}
+								</div>
 
-            </div>
-        </div>
+					<div class="single-list-content">
+						<div class="row">
+							<div class="col-xl-8 sl-title">
+								<h2>{{ property.address }}</h2>
+								<p><i class="fa fa-map-marker"></i>{{ property.title }}</p>
+							</div>
+							<div class="col-xl-4">
+								<a  class="price-btn">{{ property.FormattedPrice }} €</a>
 
+							</div>
+						</div>
+						<h3 class="sl-sp-title">DÉTAILS DU BIEN
+
+						</h3>
+						<div class="row property-details-list">
+							<div class="col-md-4 col-sm-6">
+								<p><i class="fa fa-th-large"></i> Surface de {{ property.surface }} m²</p>
+								<p><i class="fa fa-bed"></i> {{ property.rooms }} Chambres</p>
+								<p><i class="fa fa-building"></i> {{ property.floor }} étages
+								</p>
+							</div>
+							<div class="col-md-4 col-sm-6">
+								<p><i class="fa fa-building-o"></i> {{ property.categ }}</p>
+							</div>
+
+						</div>
+						<h3 class="sl-sp-title">Description</h3>
+						<div class="description">
+						<p>{{ property.description |nl2br}}</p>
+							</div>
+						<h3 class="sl-sp-title">LES +</h3>
+						<div class="row property-details-list">
+							<div class="col-md-4 col-sm-6">
+								 {% for i in property.equipement %}
+                        								<p><i class="fa fa-check-circle-o"></i> {{ i }}</p>
+
+                        {% endfor %}
+							</div>
+
+						</div>
+
+
+						<h3 class="sl-sp-title bd-no">Location</h3>
+						<div class="pos-map" id="map-canvas">
+							<div id='map' style='width: 1074px; height: 420px;'></div>
+							<script>
+                                mapboxgl.accessToken = 'pk.eyJ1IjoibWFsZWs5OCIsImEiOiJjanNnbnhubjMwMXE5NDNuem9sbjJ1NG9xIn0.S9QvJekjC8Hyn_AtUyw2uw';
+                                var latitude = {{ latitude|json_encode() }}; // Nickname will be a string
+                                var longitude = {{ longitude|json_encode() }}; // Nickname will be a string
+                                var map = new mapboxgl.Map({
+                                    container: 'map',
+                                    style: 'mapbox://styles/mapbox/streets-v9',
+                                    center: [latitude, longitude],
+                                    zoom: 11.15
+                                });
+
+                                map.on('load', function () {
+// Add a layer showing the places.
+                                    var latitude = {{ latitude|json_encode() }}; // Nickname will be a string
+                                    var longitude = {{ longitude|json_encode() }}; // Nickname will be a string
+                                    var adds = "{{ adds|json_encode() }}"; // Nickname will be a string
+
+                                    map.addLayer({
+                                        "id": "places",
+                                        "type": "symbol",
+                                        "source": {
+                                            "type": "geojson",
+                                            "data": {
+                                                "type": "FeatureCollection",
+                                                "features": [{
+
+                                                    "type": "Feature",
+                                                    "properties": {
+                                                        "description":adds,
+                                                        "icon": "star"
+                                                    },
+                                                    "geometry": {
+                                                        "type": "Point",
+                                                        "coordinates": [latitude, longitude]
+                                                    }
+                                                }  ]
+                                            }
+                                        },
+                                        "layout": {
+                                            "icon-image": "{icon}-15",
+                                            "icon-allow-overlap": true
+                                        }
+                                    });
+
+// When a click event occurs on a feature in the places layer, open a popup at the
+// location of the feature, with description HTML from its properties.
+                                    map.on('click', 'places', function (e) {
+                                        var coordinates = e.features[0].geometry.coordinates.slice();
+                                        var description = e.features[0].properties.description;
+
+// Ensure that if the map is zoomed out such that multiple
+// copies of the feature are visible, the popup appears
+// over the copy being pointed to.
+                                        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                                            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+                                        }
+
+                                        new mapboxgl.Popup()
+                                            .setLngLat(coordinates)
+                                            .setHTML(description)
+                                            .addTo(map);
+                                    });
+
+// Change the cursor to a pointer when the mouse is over the places layer.
+                                    map.on('mouseenter', 'places', function () {
+                                        map.getCanvas().style.cursor = 'pointer';
+                                    });
+
+// Change it back to a pointer when it leaves.
+                                    map.on('mouseleave', 'places', function () {
+                                        map.getCanvas().style.cursor = '';
+                                    });
+                                });
+							</script>
+						</div>
+					</div>
+				</div>
+
+	  </section>
     {% endif %}
 
 {% endblock %}

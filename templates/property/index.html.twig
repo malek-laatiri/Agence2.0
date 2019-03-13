@@ -73,22 +73,50 @@
     {% endif %}
 
     {# table body #}
-    <div class="row">
+    <section class="page-section categories-page">
+    <div class="container">
+    <div class=" row">
         {% for property in Property %}
-            <div {% if loop.index is odd %}class="color"{% endif %}>
-                <div class="card " style="width: 250px;">
-                    <img class="card-img-top" src="/images/products/{{ property.image }}">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <a href="{{ path('property.show',{id: property.id, slug: property.slug})}}" class="blockquote text-center">{{property.title}}</a>
-                        </h5>
-                        <div class="text-primary" style="font-size: 20px"><b>{{ property.FormattedPrice }} €</b></div>
-                    </div>
+        <div {% if loop.index is odd %}class="color"{% endif %}></div>
+                <div class="col-lg-4 col-md-6">
 
+                    <div class="mx-auto animated fadeInDown">
+                        <div class="feature-item">
+                            <div class="sale-notic">{{ property.token }}</div>
+                            <img class="feature-pic set-bg" src="/images/products/{{ property.image }}">
+
+                            </img>
+                            <div class="feature-text">
+                                <div class="text-center feature-title">
+                                    <h5> <a href="{{ path('property.show',{id: property.id, slug: property.slug})}}" class="room-price">{{property.title}}</a></h5>
+
+                                    <p><i class="fa fa-map-marker"></i> {{property.address}}</p>
+                                </div>
+                                <div class="room-info-warp">
+                                    <div class="room-info">
+                                        <div class="rf-left">
+                                            <p><i class="fa fa-th-large"></i> {{property.surface}}</p>
+                                            <p><i class="fa fa-bed"></i> {{property.rooms}}</p>
+                                        </div>
+                                        <div class="rf-right">
+                                            <p><i class="fa fa-building"></i> {{property.floor}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="room-info">
+                                        <div class="rf-right">
+                                            <p><i class="fa fa-clock-o"></i> {{property.createdat|date('Y-m-d')}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="#" class="room-price">{{property.price}}€</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
         {% endfor %}
     </div>
+    </div>
+    </section>
 
 
 
@@ -97,22 +125,53 @@
         </div>
         <br>
     </div>
+
+    <section class="page-section categories-page">
     <div class="container">
     <div class=" row">
+
         {%  for property in x %}
+            <div class="col-lg-4 col-md-6">
+
             <div class="mx-auto animated fadeInDown">
+        <div class="feature-item">
+                <div class="sale-notic">{{ property.token }}</div>
+            <img class="feature-pic set-bg" src="/images/products/{{ property.image }}">
 
-                <div class="card " style="width: 250px;">
-                    <img class="card-img-top " src="/images/products/{{ property.image }}">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <a href="{{ path('property.show',{id: property.id, slug: property.slug})}}" class="blockquote text-center">{{property.title}}</a>
-                        </h5>
-                        <div class="text-primary" style="font-size: 20px"><b>{{ property.FormattedPrice }} €</b></div>
-                    </div>
+            </img>
+            <div class="feature-text">
+                <div class="text-center feature-title">
+                    <h5> <a href="{{ path('property.show',{id: property.id, slug: property.slug})}}" class="room-price">{{property.title}}</a></h5>
 
+                    <p><i class="fa fa-map-marker"></i> {{property.address}}</p>
                 </div>
+                <div class="room-info-warp">
+                    <div class="room-info">
+                        <div class="rf-left">
+                            <p><i class="fa fa-th-large"></i> {{property.surface}}</p>
+                            <p><i class="fa fa-bed"></i> {{property.rooms}}</p>
+                        </div>
+                        <div class="rf-right">
+                            <p><i class="fa fa-building"></i> {{property.floor}}</p>
+                        </div>
+                    </div>
+                    <div class="room-info">
+                        <div class="rf-right">
+                            <p><i class="fa fa-clock-o"></i> {{property.createdat|date('Y-m-d')}}</p>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="room-price">{{property.price}}€</a>
             </div>
+        </div>
+            </div>
+        </div>
+
+
+
+
+
+
         {% endfor %}
 
 
@@ -122,6 +181,7 @@
 
     </div>
     </div>
+    </section>
 
 
         {# display navigation #}

@@ -128,8 +128,8 @@ class ContactController extends AbstractController
                 ->setTo('malek.laatiri73@gmail.com')
                 ->setBody(
                     $this->renderView(
-                        'emails/registration.html.twig',['x'=>1]
-                    ))
+                        'emails/registration.html.twig',['x'=>1,'property'=>$property]),'text/html'
+                    )
 
             ;
 
