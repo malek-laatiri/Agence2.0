@@ -1,0 +1,7 @@
+
+I	php:S1172K"4Remove the unused function parameter "$choiceValue".(ò§‘÷
+C	php:S1172K".Remove the unused function parameter "$value".(ò§‘÷
+8php:S125#"Remove this commented out code.(Ù°Û€ûÿÿÿÿ
+c	php:S1192-"NDefine a constant instead of duplicating this literal "form-control" 10 times.(ü®äÉ
+b	php:S1192,"HDefine a constant instead of duplicating this literal "choices" 5 times.(¾§šåþÿÿÿÿ
+\	php:S1192-"GDefine a constant instead of duplicating this literal "class" 12 times.(ü®äÉ
